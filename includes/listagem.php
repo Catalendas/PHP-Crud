@@ -32,7 +32,23 @@
 
                                                             <td colspan="6" class="text-center">Nenhuma va encontrada</td>
 
-                                                        </tr>'
+                                                        </tr>';
+
+    // Gets
+    unset($_GET['status']);
+    unset($_GET['pagina']);
+
+    $gets = http_build_query($_GET);
+
+    // Paginação
+    $paginacao = '';
+    $paginas = $obPagination->getPages();
+    foreach($paginas as $key => $pagina) {
+        $class = $pagina['atual'] ? 'btn-primary' : 'btn-light';
+        $paginacao .= '<a href="?pagina='.$pagina['pagina'].'&'. $gets.'">
+                            <button type="button" class="btn '.$class.'">'.$pagina['pagina'].'</button>
+                        </a>';
+    }                                        
 ?>
 
 <main>
@@ -43,6 +59,44 @@
         <a href="cadastrar.php">
             <button class="btn btn-success">Nova vaga</button>
         </a>
+    </section>
+
+    <section>
+
+        <form method="get">
+
+            <div class="row my-4">
+
+                <div class="col">
+
+                    <label for="">Buscar por titulo</label>
+                    <input type="text" name="search" class="form-control" value="<?=$busca?>">
+
+                </div>
+
+                <div class="col">
+                    <label for="">Status</label>
+
+                    <select name="filtroStatus" class="form-control">
+
+                        <option value="">Ativa/Inativa</option>
+                        <option value="s" <?=$filtroStatus == 's' ? 'selected' : ' '?>>Ativa</option>
+                        <option value="n" <?=$filtroStatus == 'n' ? 'selected' : ' '?>>Inativa</option>
+
+                    </select>
+
+                </div>
+
+                <div class="col d-flex align-items-end">
+
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+
+                </div>
+
+            </div>
+
+        </form>
+
     </section>
 
     <section>
@@ -67,6 +121,12 @@
 
             </tbody>
         </table>
+
+    </section>
+
+    <section>
+
+        <?=$paginacao?>
 
     </section>
 

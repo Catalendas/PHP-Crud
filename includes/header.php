@@ -1,3 +1,16 @@
+<?php
+
+  use \App\Session\Login;
+
+  // Dodos do usuario logado
+  $usuarioLogado = Login::getUsuarioLogado();
+
+  // Detalhes do usuario
+  $usuario = $usuarioLogado ?  $usuarioLogado['name'].' <a href="logout.php" class="text-light font-weight-bold ml-2">Sair</a>' :
+  
+  'Visitante <a href="login.php" class="text-light font-weight-bold ml-2">Entrar</a>';
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,9 +27,15 @@
 
     <div class="container">
 
-    <div class="jumbotron bg-danger">
+    <div class="container bg-danger">
         <h1>Web vagas</h1>
         <p>Exemplo crud Orientado a Objetos</p>
+
+        <hr class="border-light">
+
+        <div class="d-flex justify-content-start">
+          <?=$usuario?>
+        </div>
     </div>
     
     

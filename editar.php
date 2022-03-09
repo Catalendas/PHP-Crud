@@ -5,6 +5,10 @@
     define('TITLE','Editar vaga');
 
     use \App\Entity\Vaga;
+    use \App\Session\Login;
+
+    // Obriga o usuario a estar logado
+    Login::requireLogin();
 
     // Validação do ID
     if(!isset($_GET['id']) or !is_numeric($_GET['id'])) {

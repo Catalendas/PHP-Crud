@@ -93,6 +93,19 @@ use \PDO;
     }
 
     /**
+     * Metodo responsavel por pegar a quantidade de vagas do banco de dados
+     * @param string $where
+     * @return integer
+     */
+    public static function  getQuantidadeVagas($where = null) {
+
+        return(new Database('vagas'))->select($where, null, null,' COUNT(*) as qtd ')
+                                ->fetchObject()
+                                ->qtd;
+
+    }
+
+    /**
      * Método responsavel por buscar uma vaga com base em seu id
      * @param integer $id
      * @return Vaga

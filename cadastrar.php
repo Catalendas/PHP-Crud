@@ -4,6 +4,12 @@
 
     define('TITLE','Cadastrar vaga');
     use \App\Entity\Vaga;
+    use \App\Session\Login;
+
+    // Obriga o usuario a estar logado
+    Login::requireLogin();
+
+    // Instancia de vaga
     $obVaga = new Vaga;
 
     // Validation 
